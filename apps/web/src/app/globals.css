@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Enterprise Elite (Default) */
+    --background: #0f172a;
+    --foreground: #ffffff;
+    
+    --surface: #1e293b;
+    --surface-light: #334155;
+    
+    --primary: #3b82f6; 
+    --primary-glow: #60a5fa;
+    
+    --accent-pink: #ec4899;
+    --accent-blue: #3b82f6;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --border: rgba(255,255,255,0.08);
+    --glass: rgba(255,255,255,0.03);
+    
+    --gradient-start: #3b82f6;
+    --gradient-end: #8b5cf6;
+    --glow-shadow: rgba(59,130,246,0.4);
+    
+    --card-bg: rgba(30, 41, 59, 0.8);
+    --body-bg-gradient: radial-gradient(circle at 50% -20%, #1e293b 0%, transparent 60%);
+  }
+
+  /* Theme: Tesla Luxury */
+  [data-theme="Tesla Luxury"] {
+    --background: #050812;
+    --foreground: #ffffff;
+    
+    --surface: #0a1020;
+    --surface-light: #070b1a;
+    
+    --primary: #7c3aed;
+    --primary-glow: #8b5cf6;
+    
+    --accent-pink: #ec4899;
+    --accent-blue: #3b82f6;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    
+    --border: rgba(255,255,255,0.08);
+    --glass: rgba(255,255,255,0.03);
+    
+    --gradient-start: #8b5cf6;
+    --gradient-end: #ec4899;
+    --glow-shadow: rgba(139,92,246,0.4);
+    
+    --card-bg: rgba(10, 16, 32, 0.8);
+    --body-bg-gradient: radial-gradient(circle at 50% -20%, #1e0b3c 0%, transparent 60%);
+  }
+
+  /* Theme: Apple Glass */
+  [data-theme="Apple Glass"] {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    
+    --surface: #ffffff;
+    --surface-light: #f1f5f9;
+    
+    --primary: #000000;
+    --primary-glow: #333333;
+    
+    --accent-pink: #d946ef;
+    --accent-blue: #0ea5e9;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    
+    --border: rgba(0,0,0,0.08);
+    --glass: rgba(255,255,255,0.7);
+    
+    --gradient-start: #64748b;
+    --gradient-end: #94a3b8;
+    --glow-shadow: rgba(0,0,0,0.1);
+    
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --body-bg-gradient: radial-gradient(circle at 50% -20%, #e2e8f0 0%, transparent 60%);
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-image: var(--body-bg-gradient);
+    min-height: 100vh;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.2);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.4);
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+  }
+
+  .neon-border-card {
+    position: relative;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    box-shadow: 0 0 40px -10px var(--glow-shadow);
+  }
+
+  .neon-border-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 1.1rem;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end), var(--primary));
+    z-index: -1;
+    opacity: 0.8;
+  }
+
+  .gradient-button {
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    box-shadow: 0 0 20px var(--glow-shadow);
+    border: none;
+    color: white;
+  }
+  
+  .gradient-button:hover {
+    box-shadow: 0 0 30px var(--glow-shadow);
+    filter: brightness(1.1);
+  }
+
+  .active-nav-item {
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    border-left: 3px solid var(--accent-pink);
+    color: white;
+  }
+
+  .bg-cosmic {
+    background: var(--surface-light);
+  }
+}

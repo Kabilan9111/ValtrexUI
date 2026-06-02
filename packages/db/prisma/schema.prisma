@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  clerkId       String    @unique
+  role          UserRole  @default(USER)
+  credits       Int       @default(100) // Initial free credits
+  projects      Project[]
+  transactions  CreditTransaction[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model Project {
+  id             String    @id @default(uuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id])
+  name           String
+  prompt         String
+  designSystemId String
+  designSystem   DesignSystem @relation(fields: [designSystemId], references: [id])
+  blueprint      Json?     // The ultimate source of truth
+  status         GenerationStatus @default(PENDING)
+  exports        Export[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+enum GenerationStatus {
+  PENDING
+  EXTRACTING
+  BLUEPRINTING
+  MAPPING
+  GENERATING
+  COMPLETED
+  FAILED
+}
+
+model DesignSystem {
+  id          String    @id @default(uuid())
+  name        String    @unique // e.g., "Enterprise Pro"
+  slug        String    @unique
+  description String
+  isPremium   Boolean   @default(false)
+  themeConfig Json      // CSS variables, tailwind config extensions
+  projects    Project[]
+}
+
+model Export {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
+  s3Url     String
+  version   Int
+  createdAt DateTime @default(now())
+}
+
+model CreditTransaction {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  amount    Int      // Negative for usage, positive for purchase
+  reason    String   // e.g., "Generate Project", "Stripe Topup"
+  createdAt DateTime @default(now())
+}
