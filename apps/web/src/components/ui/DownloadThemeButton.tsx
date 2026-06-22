@@ -5,21 +5,21 @@ import { Download } from "lucide-react";
 import { useAppStore } from "@/store";
 
 export function DownloadThemeButton() {
-  const { selectedTheme } = useAppStore();
+  const { selectedThemeId } = useAppStore();
 
   const handleDownload = () => {
-    if (!selectedTheme) return;
+    if (!selectedThemeId) return;
 
-    const isTesla = selectedTheme === "Tesla Luxury";
-    const isApple = selectedTheme === "Apple Glass";
-    const isEnterprise = selectedTheme === "Enterprise Elite";
+    const isTesla = selectedThemeId === "tesla-luxury";
+    const isApple = selectedThemeId === "apple-glass";
+    const isEnterprise = selectedThemeId === "enterprise-elite";
     
     // Build a highly detailed mock JSON token package based on theme selection
     const themeJson = {
       $schema: "https://valtrexui.com/schema/theme/v1.json",
-      name: selectedTheme,
+      name: selectedThemeId,
       version: "1.0.0",
-      description: `Generated design system for ${selectedTheme}`,
+      description: `Generated design system for ${selectedThemeId}`,
       colors: {
         primary: isTesla ? "#8B5CF6" : isApple ? "#0071e3" : "#2563eb",
         secondary: isTesla ? "#EC4899" : isApple ? "#86868b" : "#475569",
@@ -92,7 +92,7 @@ export function DownloadThemeButton() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${selectedTheme.toLowerCase().replace(/\s+/g, "-")}-theme.json`;
+    a.download = `${selectedThemeId.toLowerCase().replace(/\s+/g, "-")}-theme.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

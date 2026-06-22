@@ -22,21 +22,41 @@ export const exportProductionProject = async (blueprint: Blueprint, theme: DNATh
   zip.file("tsconfig.json", tsConfigTemplate());
   zip.file("README.md", readmeTemplate(blueprint.projectName));
 
-  // Src Folder
+  // /public and /assets
+  zip.folder("public");
+  zip.folder("assets");
+
+  // /src Folder
   const src = zip.folder("src");
   if (!src) return;
+
+  // Additional Required Folders
+  src.folder("components");
+  src.folder("layouts");
+  src.folder("hooks");
+  src.folder("lib");
+
+  // Theme DNA Export (so the user has the raw tokens)
+  const themeFolder = src.folder("theme");
+  if (themeFolder) {
+    themeFolder.file("theme.json", JSON.stringify(theme.dna, null, 2));
+    themeFolder.file("colors.json", JSON.stringify({ color: theme.dna.color }, null, 2));
+    themeFolder.file("spacing.json", JSON.stringify({ layout: theme.dna.layout }, null, 2));
+    themeFolder.file("typography.json", JSON.stringify({ typography: theme.dna.typography }, null, 2));
+    themeFolder.file("animations.json", JSON.stringify({ animation: theme.dna.animation }, null, 2));
+  }
 
   const app = src.folder("app");
   if (!app) return;
 
   // Global styles (injecting DNA classes if needed)
-  app.file("globals.css", globalsCssTemplate(theme.dna.color)); // this is just a placeholder mapping
+  app.file("globals.css", globalsCssTemplate(theme.dna.color)); // placeholder mapping
   app.file("layout.tsx", layoutTsxTemplate());
 
   // App router pages
   blueprint.pages.forEach((page, index) => {
     const isHome = index === 0; // First page is the root page
-    const routeFolder = isHome ? app : app.folder(page.toLowerCase());
+    const routeFolder = isHome ? app : app.folder(page.toLowerCase().replace(/\\s+/g, '-'));
     if (!routeFolder) return;
 
     routeFolder.file("page.tsx", `
@@ -57,10 +77,6 @@ export default function ${page.replace(/\\s+/g, '')}Page() {
 }
 `);
   });
-
-  // Theme DNA Export (so the user has the raw tokens)
-  const themeFolder = src.folder("theme");
-  themeFolder?.file("dna.json", JSON.stringify(theme.dna, null, 2));
 
   // Generate ZIP and trigger download
   const content = await zip.generateAsync({ type: "blob" });

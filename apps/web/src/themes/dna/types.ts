@@ -1,14 +1,20 @@
 export type LayoutDNA = 
-  | 'floating-sidebar' 
-  | 'fixed-sidebar' 
-  | 'minimal-sidebar' 
-  | 'top-navigation' 
-  | 'hybrid-navigation' 
-  | 'workspace-layout' 
-  | 'analytics-layout' 
-  | 'dashboard-layout' 
-  | 'bento-layout' 
-  | 'magazine-layout';
+  | 'mac-os' 
+  | 'dense-terminal' 
+  | 'chat-workspace' 
+  | 'document-editor' 
+  | 'trading-dashboard' 
+  | 'luxury-kpi' 
+  | 'ide-workspace' 
+  | 'design-canvas' 
+  | 'ai-chat' 
+  | 'healthcare-portal' 
+  | 'education-hub' 
+  | 'ecommerce-admin' 
+  | 'enterprise-erp' 
+  | 'banking-portal' 
+  | 'gaming-hub'
+  | 'minimal-dashboard';
 
 export type CardDNA = 
   | 'glass' 

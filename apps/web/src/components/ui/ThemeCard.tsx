@@ -15,8 +15,8 @@ interface ThemeCardProps {
 }
 
 export function ThemeCard({ theme, isSelected, onSelect, index }: ThemeCardProps) {
-  const isTesla = theme.theme === "Tesla Luxury";
-  const isApple = theme.theme === "Apple Glass";
+  const isTesla = theme.themeName === "Tesla Luxury";
+  const isApple = theme.themeName === "Apple Glass";
   
   return (
     <motion.div
@@ -33,16 +33,16 @@ export function ThemeCard({ theme, isSelected, onSelect, index }: ThemeCardProps
     >
       <div 
         className="h-44 w-full relative p-2 overflow-hidden" 
-        data-theme={theme.theme}
+        data-theme={theme.themeId}
       >
         <ThemeMiniDashboard theme={theme as any} />
       </div>
       
       <div className="p-5 relative bg-background">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-lg font-bold text-text-primary">{theme.theme}</h3>
+          <h3 className="text-lg font-bold text-text-primary">{theme.themeName}</h3>
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-bold">
-            {theme.confidence}% Match
+            {theme.compatibilityScore}% Match
           </div>
         </div>
         <p className="text-sm text-text-secondary line-clamp-2">

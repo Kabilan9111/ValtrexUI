@@ -33,11 +33,11 @@ export function BlueprintPanel() {
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold text-text-muted uppercase tracking-wider">Detected Theme</span>
               <span className="text-xs font-bold text-accent-pink bg-accent-pink/10 px-2 py-0.5 rounded flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3" /> {topTheme.confidence}% Match
+                <CheckCircle2 className="w-3 h-3" /> {topTheme.compatibilityScore}% Match
               </span>
             </div>
             <div className="p-3 rounded-lg bg-surface border border-border">
-              <div className="text-sm font-bold text-text-primary mb-1">{topTheme.theme}</div>
+              <div className="text-sm font-bold text-text-primary mb-1">{topTheme.themeName}</div>
               <div className="text-[11px] text-text-muted">{topTheme.reason}</div>
             </div>
           </div>

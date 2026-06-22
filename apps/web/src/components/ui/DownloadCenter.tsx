@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/store';
 import { allThemes } from '@/themes';
 import { X, Download, FileJson, LayoutTemplate, Layers, Info } from 'lucide-react';
-import { exportThemePackage, exportUIPackage } from '@/lib/export-engine';
 import { exportProductionProject } from '@/lib/export-engine/generator';
 export function DownloadCenter() {
   const { isDownloadCenterOpen, setIsDownloadCenterOpen, selectedThemeId, blueprint, generatedFrontend } = useAppStore();
@@ -11,16 +10,6 @@ export function DownloadCenter() {
   const theme = allThemes.find(t => t.id === selectedThemeId);
 
   if (!theme) return null;
-
-  const handleDownloadTheme = () => {
-    exportThemePackage(theme);
-  };
-
-  const handleDownloadUI = () => {
-    if (blueprint) {
-      exportUIPackage(blueprint, theme as any);
-    }
-  };
 
   const handleFullProjectExport = () => {
     if (blueprint && theme && 'dna' in theme) {
@@ -59,53 +48,6 @@ export function DownloadCenter() {
             </div>
 
             <div className="p-6 space-y-4">
-              
-              {/* Theme Package */}
-              <div className="p-4 rounded-xl border border-border bg-background hover:border-primary/50 transition-colors flex items-center justify-between group">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                    <FileJson className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-text-primary">Theme Package</h3>
-                    <p className="text-xs text-text-secondary mt-1">Includes theme.json, colors, css variables, and tailwind presets.</p>
-                    <div className="flex items-center gap-3 mt-2 text-[10px] uppercase font-bold text-text-muted tracking-wider">
-                      <span>45 KB</span>
-                      <span>•</span>
-                      <span>JSON / CSS / TS</span>
-                    </div>
-                  </div>
-                </div>
-                <button onClick={handleDownloadTheme} className="shrink-0 px-4 py-2 rounded-lg bg-primary text-white font-bold text-sm hover:shadow-[0_0_15px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2">
-                  <Download className="w-4 h-4" /> Export
-                </button>
-              </div>
-
-              {/* UI Package */}
-              <div className="p-4 rounded-xl border border-border bg-background hover:border-accent-blue/50 transition-colors flex items-center justify-between group">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-accent-blue/10 border border-accent-blue/20 flex items-center justify-center shrink-0">
-                    <LayoutTemplate className="w-6 h-6 text-accent-blue" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-text-primary">Generated UI Package</h3>
-                    <p className="text-xs text-text-secondary mt-1">React components, layouts, and pages structured for Next.js.</p>
-                    <div className="flex items-center gap-3 mt-2 text-[10px] uppercase font-bold text-text-muted tracking-wider">
-                      <span>120 KB</span>
-                      <span>•</span>
-                      <span>TSX</span>
-                    </div>
-                  </div>
-                </div>
-                <button 
-                  onClick={handleDownloadUI}
-                  disabled={!blueprint}
-                  className="shrink-0 px-4 py-2 rounded-lg bg-accent-blue text-white font-bold text-sm hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Download className="w-4 h-4" /> Export
-                </button>
-              </div>
-
               {/* Full Project Export */}
               <div className="p-4 rounded-xl border border-border bg-background hover:border-emerald-500/50 transition-colors flex items-center justify-between group">
                 <div className="flex items-start gap-4">

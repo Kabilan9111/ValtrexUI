@@ -1,6 +1,57 @@
 import { DNAThemeConfig } from './types';
 
 // ===============================
+// Category: Basic
+// ===============================
+export const minimalWhite: DNAThemeConfig = {
+  id: "minimal-white",
+  version: "2.0.0",
+  metadata: {
+    name: "Minimal White",
+    category: "Basic",
+    description: "Pure white background with thin borders and clean typography.",
+    rating: 4.8,
+    downloads: 154000,
+    popularity: 100,
+    componentsCount: 50,
+    pagesCount: 10,
+    lastUpdated: new Date().toISOString().split('T')[0]
+  },
+  dna: {
+    "layout": "minimal-dashboard",
+    "card": "border",
+    "navigation": "apple",
+    "typography": "startup",
+    "animation": "minimal",
+    "color": "minimal-white"
+  }
+};
+
+export const minimalDark: DNAThemeConfig = {
+  id: "minimal-dark",
+  version: "2.0.0",
+  metadata: {
+    name: "Minimal Dark",
+    category: "Basic",
+    description: "Charcoal black background with thin white borders and SaaS styling.",
+    rating: 4.9,
+    downloads: 182000,
+    popularity: 100,
+    componentsCount: 50,
+    pagesCount: 10,
+    lastUpdated: new Date().toISOString().split('T')[0]
+  },
+  dna: {
+    "layout": "minimal-dashboard",
+    "card": "border",
+    "navigation": "modern",
+    "typography": "startup",
+    "animation": "minimal",
+    "color": "dark-premium"
+  }
+};
+
+// ===============================
 // Category: AI & Futuristic
 // ===============================
 export const teslaLuxury: DNAThemeConfig = {
@@ -18,7 +69,7 @@ export const teslaLuxury: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "luxury-kpi",
     "card": "glass",
     "navigation": "modern",
     "typography": "futuristic",
@@ -42,7 +93,7 @@ export const neuralOs: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "minimal-sidebar",
+    "layout": "ai-chat",
     "card": "flat",
     "navigation": "apple",
     "typography": "futuristic",
@@ -66,7 +117,7 @@ export const quantumGrid: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "bento-layout",
+    "layout": "ai-chat",
     "card": "neon",
     "navigation": "gaming",
     "typography": "futuristic",
@@ -90,7 +141,7 @@ export const cyberMatrix: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "ai-chat",
     "card": "border",
     "navigation": "gaming",
     "typography": "futuristic",
@@ -114,7 +165,7 @@ export const synthwavePro: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "ai-chat",
     "card": "gradient",
     "navigation": "modern",
     "typography": "startup",
@@ -138,7 +189,7 @@ export const hologramX: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "ai-chat",
     "card": "glass",
     "navigation": "modern",
     "typography": "futuristic",
@@ -162,7 +213,7 @@ export const aiCommandCenter: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "workspace-layout",
+    "layout": "ai-chat",
     "card": "elevated",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -189,7 +240,7 @@ export const stripeModern: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "mac-os",
     "card": "soft-shadow",
     "navigation": "modern",
     "typography": "startup",
@@ -213,7 +264,7 @@ export const linearPro: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "mac-os",
     "card": "flat",
     "navigation": "apple",
     "typography": "startup",
@@ -237,7 +288,7 @@ export const notionWorkspace: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "minimal-sidebar",
+    "layout": "document-editor",
     "card": "flat",
     "navigation": "apple",
     "typography": "startup",
@@ -261,7 +312,7 @@ export const vercelDark: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "mac-os",
     "card": "border",
     "navigation": "modern",
     "typography": "startup",
@@ -285,7 +336,7 @@ export const growthOs: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "mac-os",
     "card": "elevated",
     "navigation": "modern",
     "typography": "startup",
@@ -309,7 +360,7 @@ export const founderHub: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "hybrid-navigation",
+    "layout": "mac-os",
     "card": "glass",
     "navigation": "modern",
     "typography": "startup",
@@ -333,7 +384,7 @@ export const startupPrime: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "mac-os",
     "card": "gradient",
     "navigation": "modern",
     "typography": "startup",
@@ -360,7 +411,7 @@ export const enterpriseElite: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "enterprise-erp",
     "card": "elevated",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -384,7 +435,7 @@ export const ibmCarbon: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "enterprise-erp",
     "card": "flat",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -408,7 +459,7 @@ export const msFluent: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "hybrid-navigation",
+    "layout": "enterprise-erp",
     "card": "glass",
     "navigation": "modern",
     "typography": "corporate",
@@ -432,7 +483,7 @@ export const sapBusiness: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "enterprise-erp",
     "card": "elevated",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -456,7 +507,7 @@ export const corporateMatrix: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "enterprise-erp",
     "card": "border",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -480,7 +531,7 @@ export const executiveBoardroom: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "workspace-layout",
+    "layout": "enterprise-erp",
     "card": "elevated",
     "navigation": "enterprise",
     "typography": "luxury",
@@ -507,7 +558,7 @@ export const bloombergTerminal: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "dense-terminal",
     "card": "flat",
     "navigation": "finance",
     "typography": "corporate",
@@ -531,7 +582,7 @@ export const fintechElite: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "banking-portal",
     "card": "soft-shadow",
     "navigation": "modern",
     "typography": "startup",
@@ -555,7 +606,7 @@ export const tradingPro: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "analytics-layout",
+    "layout": "dense-terminal",
     "card": "border",
     "navigation": "finance",
     "typography": "corporate",
@@ -579,7 +630,7 @@ export const wealthOs: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "banking-portal",
     "card": "elevated",
     "navigation": "finance",
     "typography": "luxury",
@@ -603,7 +654,7 @@ export const bankingPrime: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "banking-portal",
     "card": "elevated",
     "navigation": "finance",
     "typography": "corporate",
@@ -627,7 +678,7 @@ export const hedgeFundUi: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "banking-portal",
     "card": "glass",
     "navigation": "finance",
     "typography": "luxury",
@@ -654,7 +705,7 @@ export const appleGlass: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "minimal-sidebar",
+    "layout": "mac-os",
     "card": "glass",
     "navigation": "apple",
     "typography": "startup",
@@ -678,7 +729,7 @@ export const appleVision: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "luxury-kpi",
     "card": "glass",
     "navigation": "apple",
     "typography": "startup",
@@ -702,7 +753,7 @@ export const porscheLuxury: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "bento-layout",
+    "layout": "luxury-kpi",
     "card": "flat",
     "navigation": "modern",
     "typography": "luxury",
@@ -726,7 +777,7 @@ export const monacoGold: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "luxury-kpi",
     "card": "elevated",
     "navigation": "modern",
     "typography": "luxury",
@@ -750,7 +801,7 @@ export const rolexBlack: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "workspace-layout",
+    "layout": "luxury-kpi",
     "card": "border",
     "navigation": "modern",
     "typography": "luxury",
@@ -774,7 +825,7 @@ export const ferrariRed: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "luxury-kpi",
     "card": "elevated",
     "navigation": "modern",
     "typography": "luxury",
@@ -801,7 +852,7 @@ export const cyberArena: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "gaming-hub",
     "card": "neon",
     "navigation": "gaming",
     "typography": "futuristic",
@@ -825,7 +876,7 @@ export const valorantInspired: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "bento-layout",
+    "layout": "gaming-hub",
     "card": "flat",
     "navigation": "gaming",
     "typography": "futuristic",
@@ -849,7 +900,7 @@ export const esportsPro: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "gaming-hub",
     "card": "gradient",
     "navigation": "gaming",
     "typography": "startup",
@@ -873,7 +924,7 @@ export const neonGaming: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "gaming-hub",
     "card": "neon",
     "navigation": "gaming",
     "typography": "futuristic",
@@ -897,7 +948,7 @@ export const arcadeX: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "minimal-sidebar",
+    "layout": "gaming-hub",
     "card": "border",
     "navigation": "gaming",
     "typography": "futuristic",
@@ -921,7 +972,7 @@ export const battleStation: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "workspace-layout",
+    "layout": "gaming-hub",
     "card": "elevated",
     "navigation": "gaming",
     "typography": "futuristic",
@@ -948,7 +999,7 @@ export const shopifyPremium: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "ecommerce-admin",
     "card": "soft-shadow",
     "navigation": "modern",
     "typography": "startup",
@@ -972,7 +1023,7 @@ export const marketplaceX: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "ecommerce-admin",
     "card": "flat",
     "navigation": "modern",
     "typography": "startup",
@@ -996,7 +1047,7 @@ export const luxuryCommerce: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "minimal-sidebar",
+    "layout": "ecommerce-admin",
     "card": "glass",
     "navigation": "modern",
     "typography": "luxury",
@@ -1020,7 +1071,7 @@ export const fashionElite: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "magazine-layout",
+    "layout": "ecommerce-admin",
     "card": "flat",
     "navigation": "apple",
     "typography": "editorial",
@@ -1044,7 +1095,7 @@ export const retailOs: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "ecommerce-admin",
     "card": "elevated",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -1068,7 +1119,7 @@ export const d2cGrowth: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "ecommerce-admin",
     "card": "gradient",
     "navigation": "modern",
     "typography": "startup",
@@ -1095,7 +1146,7 @@ export const medflow: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "healthcare-portal",
     "card": "elevated",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -1119,7 +1170,7 @@ export const clinicalOs: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "workspace-layout",
+    "layout": "healthcare-portal",
     "card": "flat",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -1143,7 +1194,7 @@ export const healthPulse: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "healthcare-portal",
     "card": "soft-shadow",
     "navigation": "modern",
     "typography": "startup",
@@ -1167,7 +1218,7 @@ export const pharmaElite: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "top-navigation",
+    "layout": "healthcare-portal",
     "card": "border",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -1194,7 +1245,7 @@ export const skillforge: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "bento-layout",
+    "layout": "education-hub",
     "card": "elevated",
     "navigation": "modern",
     "typography": "startup",
@@ -1218,7 +1269,7 @@ export const learningHub: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "fixed-sidebar",
+    "layout": "education-hub",
     "card": "flat",
     "navigation": "modern",
     "typography": "corporate",
@@ -1242,7 +1293,7 @@ export const universityLms: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "dashboard-layout",
+    "layout": "education-hub",
     "card": "border",
     "navigation": "enterprise",
     "typography": "corporate",
@@ -1266,7 +1317,7 @@ export const studentOs: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "education-hub",
     "card": "glass",
     "navigation": "apple",
     "typography": "startup",
@@ -1293,7 +1344,7 @@ export const behanceStudio: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "magazine-layout",
+    "layout": "design-canvas",
     "card": "flat",
     "navigation": "modern",
     "typography": "editorial",
@@ -1317,7 +1368,7 @@ export const dribbblePro: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "bento-layout",
+    "layout": "design-canvas",
     "card": "soft-shadow",
     "navigation": "apple",
     "typography": "startup",
@@ -1341,7 +1392,7 @@ export const creativeAgency: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "floating-sidebar",
+    "layout": "design-canvas",
     "card": "glass",
     "navigation": "modern",
     "typography": "luxury",
@@ -1365,7 +1416,7 @@ export const designStudio: DNAThemeConfig = {
     lastUpdated: new Date().toISOString().split('T')[0]
   },
   dna: {
-    "layout": "workspace-layout",
+    "layout": "design-canvas",
     "card": "border",
     "navigation": "apple",
     "typography": "editorial",
@@ -1375,6 +1426,8 @@ export const designStudio: DNAThemeConfig = {
 };
 
 export const allDNAThemes: DNAThemeConfig[] = [
+  minimalWhite,
+  minimalDark,
   teslaLuxury,
   neuralOs,
   quantumGrid,
