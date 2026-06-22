@@ -35,7 +35,7 @@ export function ThemeCard({ theme, isSelected, onSelect, index }: ThemeCardProps
         className="h-44 w-full relative p-2 overflow-hidden" 
         data-theme={theme.theme}
       >
-        <ThemeMiniDashboard />
+        <ThemeMiniDashboard theme={theme as any} />
       </div>
       
       <div className="p-5 relative bg-background">

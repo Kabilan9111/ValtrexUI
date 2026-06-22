@@ -62,8 +62,8 @@ export function ThemeRecommendationPanel() {
                Top Match
              </div>
              <div className="flex items-center justify-between p-3 rounded-lg bg-surface-light border border-primary/30">
-                <div className="font-bold text-text-primary text-sm">{recommendedThemes[0].theme}</div>
-                <div className="text-xs font-bold text-emerald-400">{recommendedThemes[0].confidence}%</div>
+                <div className="font-bold text-text-primary text-sm">{recommendedThemes[0].themeName}</div>
+                <div className="text-xs font-bold text-emerald-400">{recommendedThemes[0].compatibilityScore}%</div>
              </div>
            </div>
         )}

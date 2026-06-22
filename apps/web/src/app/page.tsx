@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   Sparkles, FileText, Code2, Download, Mic, 
@@ -13,19 +14,21 @@ import { BlueprintPanel } from "@/components/ui/BlueprintPanel";
 import { ThemeRecommendationPanel } from "@/components/ui/ThemeRecommendationPanel";
 import { ThemePreviewGallery } from "@/components/ui/ThemePreviewGallery";
 import { FrontendPreviewWorkspace } from "@/components/ui/FrontendPreviewWorkspace";
-
+import { DownloadCenter } from "@/components/ui/DownloadCenter";
+import { allThemes } from "@/themes";
+import { COLOR_DNA_TOKENS } from "@/themes/dna/tokens";
 export default function Dashboard() {
   const { 
     prompt, setPrompt, generationState, setGenerationState, 
-    setDetectedIndustry, setRecommendedThemes, setSelectedTheme, 
-    setBlueprint, setGeneratedFrontend, selectedTheme, blueprint 
+    setDetectedIndustry, setRecommendedThemes, setSelectedThemeId, 
+    setBlueprint, setGeneratedFrontend, selectedThemeId, blueprint 
   } = useAppStore();
 
   useEffect(() => {
-    if (selectedTheme) {
-      document.body.setAttribute('data-theme', selectedTheme);
+    if (selectedThemeId) {
+      document.body.setAttribute('data-theme', selectedThemeId);
     }
-  }, [selectedTheme]);
+  }, [selectedThemeId]);
 
   const handleGenerate = async () => {
     if (!prompt) return;
@@ -36,13 +39,13 @@ export default function Dashboard() {
 
     setBlueprint(blueprint);
     setRecommendedThemes(recommendedThemes);
-    setSelectedTheme(recommendedThemes[0].theme); // auto-select highest confidence
+    setSelectedThemeId(recommendedThemes[0].themeId); // auto-select highest confidence
   };
 
   const handleGenerateFrontend = async () => {
-    if (!blueprint || !selectedTheme) return;
+    if (!blueprint || !selectedThemeId) return;
     
-    const frontendMock = await generateFrontendMock(blueprint, selectedTheme, (stage, data) => {
+    const frontendMock = await generateFrontendMock(blueprint, selectedThemeId, (stage, data) => {
       setGenerationState(stage);
     });
 
@@ -50,8 +53,10 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto w-full relative">
-      <div className="flex flex-col lg:flex-row gap-8">
+    <>
+      <DownloadCenter />
+      <div className="max-w-[1600px] mx-auto w-full relative">
+        <div className="flex flex-col lg:flex-row gap-8">
         
         {/* Left Column (Main Content) */}
         <div className="flex-1 space-y-10 min-w-0">
@@ -246,30 +251,35 @@ export default function Dashboard() {
             <div className="glass-card rounded-2xl p-6 shadow-2xl">
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-sm font-bold text-text-primary">Popular Design Systems</h3>
-                <button className="text-[11px] font-bold text-primary hover:text-accent-pink transition-colors">
+                <Link href="/marketplace" className="text-[11px] font-bold text-primary hover:text-accent-pink transition-colors">
                   View all
-                </button>
+                </Link>
               </div>
               <div className="space-y-5">
-                {[
-                  { name: "Enterprise Pro", cat: "Most popular", rating: "4.9", icon: "E", color: "bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.6)]" },
-                  { name: "Tesla Luxury", cat: "Premium", rating: "4.8", icon: "T", color: "bg-purple-600 shadow-[0_0_10px_rgba(147,51,234,0.6)]" },
-                  { name: "Apple Glass", cat: "Minimal", rating: "4.7", icon: "A", color: "bg-white text-black shadow-[0_0_10px_rgba(255,255,255,0.4)]" },
-                ].map((sys, i) => (
-                  <div key={i} className="flex items-center justify-between group cursor-pointer">
-                    <div className="flex items-center gap-4">
-                      <div className={clsx("w-10 h-10 rounded-xl flex items-center justify-center font-black text-[15px] text-white", sys.color)}>
-                        {sys.icon}
-                      </div>
-                      <div>
-                        <div className="text-[13px] font-bold text-text-primary group-hover:text-primary transition-colors">{sys.name}</div>
-                        <div className="text-[11px] text-text-muted flex items-center gap-1.5 mt-0.5">
-                          {sys.cat} <span className="text-[8px]">•</span> <span className="text-yellow-400 font-bold">{sys.rating}</span>
+                {allThemes
+                  .sort((a, b) => b.metadata.rating - a.metadata.rating)
+                  .slice(0, 4)
+                  .map((sys, i) => {
+                    const colorDNA = COLOR_DNA_TOKENS[sys.dna.color];
+                    const getBgClass = (textClass: string) => textClass.replace('text-', 'bg-');
+                    const bgClass = getBgClass(colorDNA.primary);
+
+                    return (
+                      <div key={i} className="flex items-center justify-between group cursor-pointer">
+                        <div className="flex items-center gap-4">
+                          <div className={clsx("w-10 h-10 rounded-xl flex items-center justify-center font-black text-[15px] text-white shadow-lg", bgClass)}>
+                            {sys.metadata.name.charAt(0)}
+                          </div>
+                          <div>
+                            <div className="text-[13px] font-bold text-text-primary group-hover:text-primary transition-colors">{sys.metadata.name}</div>
+                            <div className="text-[11px] text-text-muted flex items-center gap-1.5 mt-0.5">
+                              {sys.metadata.category} <span className="text-[8px]">•</span> <span className="text-yellow-400 font-bold">{sys.metadata.rating}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    );
+                })}
               </div>
             </div>
           )}
@@ -326,12 +336,13 @@ export default function Dashboard() {
             </div>
             <span className="text-[13px] font-bold text-white tracking-wide">New: Theme Marketplace is now live.</span>
           </div>
-          <button className="text-[11px] font-black uppercase tracking-wider px-4 py-2 rounded-full gradient-button transition-all">
+          <Link href="/marketplace" className="text-[11px] font-black uppercase tracking-wider px-4 py-2 rounded-full gradient-button transition-all">
             Explore Now &rarr;
-          </button>
+          </Link>
         </motion.div>
       </div>
 
-    </div>
+      </div>
+    </>
   );
 }

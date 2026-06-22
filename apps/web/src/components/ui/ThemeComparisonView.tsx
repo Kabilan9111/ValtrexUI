@@ -5,13 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import { useAppStore } from "@/store";
 import { ThemeMiniDashboard } from "./ThemeMiniDashboard";
+import { allThemes } from "@/themes";
 
 interface ThemeComparisonViewProps {
   onClose: () => void;
 }
 
 export function ThemeComparisonView({ onClose }: ThemeComparisonViewProps) {
-  const { recommendedThemes, setSelectedTheme } = useAppStore();
+  const { recommendedThemes, setSelectedThemeId } = useAppStore();
   
   if (!recommendedThemes || recommendedThemes.length === 0) return null;
 
@@ -40,26 +41,28 @@ export function ThemeComparisonView({ onClose }: ThemeComparisonViewProps) {
 
           <div className="flex-1 overflow-auto p-8 bg-background">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {recommendedThemes.slice(0, 3).map((themeRec, idx) => (
-                <div key={themeRec.theme} className="flex flex-col gap-4">
+              {recommendedThemes.slice(0, 3).map((themeRec, idx) => {
+                const fullTheme = allThemes.find(t => t.id === themeRec.themeId);
+                return (
+                <div key={themeRec.themeId} className="flex flex-col gap-4">
                   <div className="flex items-center justify-between px-2">
-                    <h3 className="font-bold text-text-primary text-lg">{themeRec.theme}</h3>
+                    <h3 className="font-bold text-text-primary text-lg">{themeRec.themeName}</h3>
                     <span className="text-xs font-bold px-2 py-1 rounded bg-primary/20 text-primary border border-primary/30">
-                      {themeRec.confidence}% Match
+                      {themeRec.compatibilityScore}% Match
                     </span>
                   </div>
                   
                   {/* The actual preview box */}
                   <div 
                     className="aspect-[4/3] rounded-xl border border-border overflow-hidden bg-background relative group shadow-xl shadow-black/20"
-                    data-theme={themeRec.theme}
+                    data-theme={themeRec.themeId}
                   >
-                    <ThemeMiniDashboard />
+                    <ThemeMiniDashboard theme={fullTheme as any} />
                     
                     <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 backdrop-blur-none group-hover:backdrop-blur-sm transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
                       <button 
                         onClick={() => {
-                          setSelectedTheme(themeRec.theme);
+                          setSelectedThemeId(themeRec.themeId);
                           onClose();
                         }}
                         className="px-6 py-3 rounded-xl bg-primary text-white font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all"
@@ -73,7 +76,8 @@ export function ThemeComparisonView({ onClose }: ThemeComparisonViewProps) {
                     {themeRec.reason}
                   </p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
           

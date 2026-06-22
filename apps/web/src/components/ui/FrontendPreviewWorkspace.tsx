@@ -4,23 +4,28 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Monitor, Tablet, Smartphone, Sparkles, Code2, Download } from "lucide-react";
 import { useAppStore } from "@/store";
+import { allThemes } from "@/themes";
 import clsx from "clsx";
 import { DashboardPreview } from "./mocks/DashboardPreview";
 import { AnalyticsPreview } from "./mocks/AnalyticsPreview";
 import { SettingsPreview } from "./mocks/SettingsPreview";
 import { AgentPreview } from "./mocks/AgentPreview";
 import { BusinessPlanPreview } from "./mocks/BusinessPlanPreview";
-import { DownloadThemeButton } from "./DownloadThemeButton";
+import { ThemeShowcase } from "./ThemeShowcase";
 
 export function FrontendPreviewWorkspace() {
-  const { blueprint, selectedTheme, setGenerationState } = useAppStore();
+  const { blueprint, selectedThemeId, setGenerationState, setIsDownloadCenterOpen } = useAppStore();
   const [device, setDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
   const [activeTab, setActiveTab] = useState<string>(blueprint?.pages[0] || "Dashboard");
 
-  if (!blueprint || !selectedTheme) return null;
+  if (!blueprint || !selectedThemeId) return null;
+
+  const theme = allThemes.find(t => t.id === selectedThemeId) || allThemes[0];
 
   // Map blueprint page names to available mock components
   const renderMockPage = (pageName: string) => {
+    if (pageName === "Design System") return <ThemeShowcase />;
+
     const p = pageName.toLowerCase();
     if (p.includes("dashboard")) return <DashboardPreview />;
     if (p.includes("analytic")) return <AnalyticsPreview />;
@@ -29,6 +34,8 @@ export function FrontendPreviewWorkspace() {
     if (p.includes("plan") || p.includes("editor") || p.includes("document")) return <BusinessPlanPreview />;
     return <DashboardPreview />; // Fallback
   };
+
+  const tabs = ["Design System", ...blueprint.pages];
 
   return (
     <motion.div
@@ -42,7 +49,7 @@ export function FrontendPreviewWorkspace() {
             <Sparkles className="w-6 h-6 text-primary" /> Live Frontend Preview
           </h2>
           <p className="text-text-secondary text-sm">
-            Experience your generated architecture rendered in <span className="text-primary font-bold">{selectedTheme}</span>.
+            Experience your generated architecture rendered in <span className="text-primary font-bold">{theme.metadata.name}</span>.
           </p>
         </div>
         
@@ -73,13 +80,18 @@ export function FrontendPreviewWorkspace() {
             >
               Change Theme
             </button>
-            <DownloadThemeButton />
+            <button 
+              onClick={() => setIsDownloadCenterOpen(true)}
+              className="px-4 py-2 bg-primary text-white rounded-xl text-sm font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)] flex items-center gap-2 hover:opacity-90 transition-all"
+            >
+              <Download className="w-4 h-4" /> Export Project
+            </button>
           </div>
         </div>
       </div>
 
       <div className="flex gap-2 p-2 bg-surface border border-border rounded-2xl overflow-x-auto w-full">
-         {blueprint.pages.map(page => (
+         {tabs.map(page => (
             <button
               key={page}
               onClick={() => setActiveTab(page)}
@@ -102,11 +114,11 @@ export function FrontendPreviewWorkspace() {
             "w-[375px] h-[812px]"
           )}
           style={{ 
-            maxHeight: '1000px'
+            maxHeight: activeTab === "Design System" ? 'none' : '1000px'
           }}
         >
           {/* Ensure the preview container has the theme data attribute so it inherits variables */}
-          <div className="w-full h-full relative" data-theme={selectedTheme}>
+          <div className="w-full h-full relative overflow-y-auto" data-theme={theme.id}>
             {renderMockPage(activeTab)}
           </div>
         </div>
